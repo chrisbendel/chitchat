@@ -14,7 +14,6 @@
 		83D9483A2073BADA00870EEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D948382073BADA00870EEF /* LaunchScreen.storyboard */; };
 		83D948422073E0EE00870EEF /* api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D948412073E0EE00870EEF /* api.swift */; };
 		83D948442073E21200870EEF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D948432073E21200870EEF /* Message.swift */; };
-		83D948462073F75500870EEF /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D948452073F75500870EEF /* MessageTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		83D9483B2073BADA00870EEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83D948412073E0EE00870EEF /* api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api.swift; sourceTree = "<group>"; };
 		83D948432073E21200870EEF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		83D948452073F75500870EEF /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 				83D9483B2073BADA00870EEF /* Info.plist */,
 				83D948412073E0EE00870EEF /* api.swift */,
 				83D948432073E21200870EEF /* Message.swift */,
-				83D948452073F75500870EEF /* MessageTableViewController.swift */,
 			);
 			path = chitchat;
 			sourceTree = "<group>";
@@ -147,7 +144,6 @@
 			files = (
 				83D948322073BADA00870EEF /* ChatController.swift in Sources */,
 				83D948442073E21200870EEF /* Message.swift in Sources */,
-				83D948462073F75500870EEF /* MessageTableViewController.swift in Sources */,
 				83D948422073E0EE00870EEF /* api.swift in Sources */,
 				83D948302073BADA00870EEF /* AppDelegate.swift in Sources */,
 			);
