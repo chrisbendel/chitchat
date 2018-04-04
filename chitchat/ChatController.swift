@@ -1,4 +1,5 @@
 import UIKit
+
 class ChatController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var message: UITextField!
     @IBOutlet weak var sendButton: UIButton!
