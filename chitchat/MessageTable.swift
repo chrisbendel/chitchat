@@ -24,6 +24,22 @@ class MessageTable: UITableViewController {
         cell.LikesLabel.text = "(\(String(m.likes)))"
         cell.DislikesLabel.text = "(\(String(m.dislikes)))"
         cell.MessageLabel.text = m.message
+        if (m.imageUrl != "") {
+            let url = URL(string: m.imageUrl)
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url!) {
+                    DispatchQueue.main.async {
+                        cell.MessageImage.image = UIImage(data: data)
+                    }
+                } else {
+                    print("bad image")
+                }
+            }
+            
+        } else {
+            cell.MessageImage.image = nil
+        }
+    
         cell.id = m.id
         return cell
     }

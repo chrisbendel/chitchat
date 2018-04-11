@@ -9,6 +9,7 @@ struct Message {
     let likes: Int
     let loc: [String]?
     let message: String
+    let imageUrl: String
     
     init?(json: [String: Any]) {
         guard let idJSON = json["_id"] as? String,
@@ -24,38 +25,41 @@ struct Message {
         }
         
         let coordinatesJSON = json["loc"] as? [String]
-        
-//        print(idJSON)
-//        print(clientJSON)
-//        print(dateJSON)
-//        print(dislikesJSON)
-//        
-//        print(ipJSON)
-//        print(likesJSON)
-//        print(coordinatesJSON)
-//        print(messageJSON)
+        let url = detectUrl(s: messageJSON)
         
         self.id = idJSON
-        self.client = clientJSON
+        self.client = clientJSON.components(separatedBy: "@")[0]
         self.date = dateJSON
         self.dislikes = dislikesJSON
         self.ip = ipJSON
         self.likes = likesJSON
         self.loc = coordinatesJSON
-        self.message = messageJSON
+        self.message = removeUrl(s: messageJSON, u: url)
+        self.imageUrl = url
     }
 }
 
+func removeUrl(s: String, u: String) -> String {
+    print(s)
+    print(u)
+    if (u == "") {
+        return s
+    }
+    
+    return s.replacingOccurrences(of: u, with: "")
+}
 
-//"_id" = 5ac3ca134c17a831822f4dd1;
-//client = "dkopec@champlain.edu";
-//date = "Tue, 03 Apr 2018 18:38:11 GMT";
-//dislikes = 0;
-//ip = "216.93.146.138";
-//likes = 1;
-//loc =     (
-//"<null>",
-//"<null>"
-//);
-//message = hi;
-
+func detectUrl(s: String) -> String {
+    let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+    let matches = detector.matches(in: s, options: [], range: NSRange(location: 0, length: s.utf16.count))
+    
+    for match in matches {
+        if let url = match.url {
+            let sUrl = url.absoluteString
+            let validUrl = sUrl.components(separatedBy: "http")[1]
+            return "http\(validUrl)"
+        }
+    }
+    
+    return ""
+}

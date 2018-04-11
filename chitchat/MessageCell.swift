@@ -19,6 +19,7 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var DislikesButton: LikeButton!
     @IBOutlet weak var DislikesLabel: UILabel!
     @IBOutlet weak var LikesLabel: UILabel!
+    @IBOutlet weak var MessageImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

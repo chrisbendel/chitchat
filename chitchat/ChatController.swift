@@ -11,7 +11,7 @@ class ChatController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllMessages() { newMessages in
-            print(newMessages.count)
+//            print(newMessages.count)
             DispatchQueue.main.async {
                 self.mTable.messages = newMessages
                 self.mTable.tableView.reloadData()
@@ -27,18 +27,18 @@ class ChatController: UIViewController {
 
 
     @IBAction func sendMessageButton(_ sender: Any) {
-        print("sending \(messageBox.text!)")
+//        print("sending \(messageBox.text!)")
         if messageBox.text! == "" {
             //TODO notify user that theres nothing there
             return
         }
         sendMessage(message: messageBox.text!) { err in
             if err != nil {
-                print("error sending message I guess")
+//                print("error sending message I guess")
                 return
             }
             getAllMessages() { newMessages in
-                print(newMessages.count)
+//                print(newMessages.count)
                 DispatchQueue.main.async {
                     self.mTable.messages = newMessages
                     self.mTable.tableView.reloadData()
@@ -49,7 +49,7 @@ class ChatController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("segue")
+//        print("segue")
         if let t = segue.destination as? MessageTable {
             mTable = t
         }
