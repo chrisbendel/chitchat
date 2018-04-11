@@ -53,6 +53,7 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
             }
         }
         print(messages.count)
+        messages.reverse()
         callback(messages)
     }
 }
