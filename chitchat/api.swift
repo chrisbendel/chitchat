@@ -44,7 +44,7 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
             return
         }
         var messages: [Message] = [Message]()
-        print(responseObject)
+        //print(responseObject)
         
         if let m = responseObject["messages"] as? [[String:Any]] {
             for messageBlob in m {

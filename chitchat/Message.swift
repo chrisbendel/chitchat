@@ -25,15 +25,15 @@ struct Message {
         
         let coordinatesJSON = json["loc"] as? [String]
         
-        print(idJSON)
-        print(clientJSON)
-        print(dateJSON)
-        print(dislikesJSON)
-        
-        print(ipJSON)
-        print(likesJSON)
-        print(coordinatesJSON)
-        print(messageJSON)
+//        print(idJSON)
+//        print(clientJSON)
+//        print(dateJSON)
+//        print(dislikesJSON)
+//        
+//        print(ipJSON)
+//        print(likesJSON)
+//        print(coordinatesJSON)
+//        print(messageJSON)
         
         self.id = idJSON
         self.client = clientJSON

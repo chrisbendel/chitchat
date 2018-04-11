@@ -10,14 +10,11 @@ import UIKit
 
 class MessageCell: UITableViewCell {
     
-    @IBOutlet weak var LikesLabel: UILabel!
+    @IBOutlet weak var LikesLabel: UIButton!
+    @IBOutlet weak var DisikesLabel: UIButton!
+    @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var ClientLabel: UILabel!
     @IBOutlet weak var MessageLabel: UILabel!
-//    var message: String = ""
-//    var date: String = ""
-//    var likes: Int = 0
-//    var client: String = "robin"
-//    var dislikes: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()

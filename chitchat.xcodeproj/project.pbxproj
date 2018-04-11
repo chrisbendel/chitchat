@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		262A8A9D207C93C600BB3423 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A8A9C207C93C600BB3423 /* MessageCell.swift */; };
+		262A8A9F207D854E00BB3423 /* MessageTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A8A9E207D854E00BB3423 /* MessageTable.swift */; };
 		83D948302073BADA00870EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9482F2073BADA00870EEF /* AppDelegate.swift */; };
 		83D948322073BADA00870EEF /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D948312073BADA00870EEF /* ChatController.swift */; };
 		83D948352073BADA00870EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D948332073BADA00870EEF /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		262A8A9C207C93C600BB3423 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		262A8A9E207D854E00BB3423 /* MessageTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTable.swift; sourceTree = "<group>"; };
 		719511036B8AFA5D8CEA090D /* Pods-chitchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chitchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chitchat/Pods-chitchat.debug.xcconfig"; sourceTree = "<group>"; };
 		7CC1B1F0CB53C3A0C8CDA855 /* Pods_chitchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chitchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D9482C2073BADA00870EEF /* chitchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chitchat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +71,7 @@
 			children = (
 				83D9482F2073BADA00870EEF /* AppDelegate.swift */,
 				83D948312073BADA00870EEF /* ChatController.swift */,
+				262A8A9E207D854E00BB3423 /* MessageTable.swift */,
 				262A8A9C207C93C600BB3423 /* MessageCell.swift */,
 				83D948332073BADA00870EEF /* Main.storyboard */,
 				83D948362073BADA00870EEF /* Assets.xcassets */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262A8A9F207D854E00BB3423 /* MessageTable.swift in Sources */,
 				83D948322073BADA00870EEF /* ChatController.swift in Sources */,
 				262A8A9D207C93C600BB3423 /* MessageCell.swift in Sources */,
 				83D948442073E21200870EEF /* Message.swift in Sources */,

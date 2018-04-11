@@ -1,19 +1,31 @@
 import UIKit
 
-class ChatController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var message: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var messageTableView: UITableView!
-    @IBOutlet weak var MessageTable: UITableView!
+class ChatController: UIViewController {
     
-    var messages: [Message] = [Message]()
+    @IBOutlet weak var message: UITextField!
+//    @IBOutlet weak var mTable: MessageTable!
+    @IBOutlet weak var tableView: UIView!
+    
+    var mTable: MessageTable = MessageTable()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let t = tableView as? MessageTable {
+            print("hi")
+        }
+        for v in tableView.subviews {
+            if let table = v as? MessageTable {
+                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>it happenned")
+            }
+        }
         getAllMessages() { newMessages in
-            print(self.messages.count)
-            print("hello")
-            self.messages = newMessages
+            print(newMessages.count)
+            print("loaded")
+            DispatchQueue.main.async {
+                self.mTable.messages = newMessages
+                self.mTable.tableView.reloadData()
+            }
         }
     }
 
@@ -22,28 +34,26 @@ class ChatController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        let m = messages[indexPath.row]
-        cell.ClientLabel.text = m.client
-        cell.LikesLabel.text = String(m.likes)
-        cell.MessageLabel.text = m.message
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cell selected code here
-    }
+
 
     @IBAction func sendMessage(_ sender: Any) {
         getAllMessages() { newMessages in
-            print(self.messages.count)
+            print(newMessages.count)
             print("hello")
-            self.messages = newMessages
+            DispatchQueue.main.async {
+                print("async")
+//                self.mTable.messages = newMessages
+//                self.mTable.reloadData()
+            }
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue")
+        if let t = segue.destination as? MessageTable {
+            print("huh")
+            mTable = t
         }
     }
 }
