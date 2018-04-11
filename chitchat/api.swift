@@ -45,12 +45,10 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
         }
         var messages: [Message] = [Message]()
         //print(responseObject)
-        
         if let m = responseObject["messages"] as? [[String:Any]] {
             for messageBlob in m {
                 if let healthyMessage = Message(json: messageBlob ) {
                     messages.append(healthyMessage)
-//                    print("good!")
                 }
             }
         }
@@ -70,9 +68,48 @@ func sendMessage(message: String, callback: @escaping (Error?) -> Void) {
             callback(error)
             return
         }
+//        print(responseObject)
+        if let m = responseObject["message"] as? String {
+            if m != "Success" {
+                print("error sending message")
+                //TODO return error
+            }
+        }
+        callback(nil)
+    }
+}
+
+func likeMessage(id: String, callback: @escaping (Error?) -> Void) {
+    sendRequest("/like/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
+        guard let responseObject = responseObject, error == nil else {
+            print(error ?? "Unknown error")
+            callback(error)
+            return
+        }
         print(responseObject)
         if let m = responseObject["message"] as? String {
             print("its a string: \(m)")
+            if m != "Success" {
+                print("error sending message")
+            }
+        }
+        callback(nil)
+    }
+}
+
+func dislikeMessage(id: String, callback: @escaping (Error?) -> Void) {
+    sendRequest("/dislike/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
+        guard let responseObject = responseObject, error == nil else {
+            print(error ?? "Unknown error")
+            callback(error)
+            return
+        }
+        print(responseObject)
+        if let m = responseObject["message"] as? String {
+            print("its a string: \(m)")
+            if m != "Success" {
+                print("error sending message")
+            }
         }
         callback(nil)
     }

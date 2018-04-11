@@ -19,13 +19,16 @@ class MessageTable: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath) as! MessageCell
         let m = messages[indexPath.row]
+        print("\(m.message), \(m.likes)")
         cell.ClientLabel.text = m.client
-        cell.LikesLabel.titleLabel?.text = String(m.likes)
+        cell.LikesLabel.text = "(\(String(m.likes)))"
+        cell.DislikesLabel.text = "(\(String(m.dislikes)))"
         cell.MessageLabel.text = m.message
+        cell.id = m.id
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cell selected code here
-    }
+    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // cell selected code here
+//    }
 }

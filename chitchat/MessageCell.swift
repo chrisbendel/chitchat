@@ -10,11 +10,15 @@ import UIKit
 
 class MessageCell: UITableViewCell {
     
-    @IBOutlet weak var LikesLabel: UIButton!
-    @IBOutlet weak var DisikesLabel: UIButton!
+    var id: String!
+    
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var ClientLabel: UILabel!
     @IBOutlet weak var MessageLabel: UILabel!
+    @IBOutlet weak var LikesButton: LikeButton!
+    @IBOutlet weak var DislikesButton: LikeButton!
+    @IBOutlet weak var DislikesLabel: UILabel!
+    @IBOutlet weak var LikesLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,4 +31,19 @@ class MessageCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func DislikeButtonPressed(_ sender: LikeButton) {
+        
+        dislikeMessage(id: id) {error in
+            print("yeah")
+            //TODO upadte
+        }
+    }
+    
+    @IBAction func LikeButtonPressed(_ sender: LikeButton) {
+        print("hi")
+        likeMessage(id: id) {error in
+            print("yeah")
+            //TODO upadte
+        }
+    }
 }
