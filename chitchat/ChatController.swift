@@ -2,8 +2,7 @@ import UIKit
 
 class ChatController: UIViewController {
     
-    @IBOutlet weak var message: UITextField!
-//    @IBOutlet weak var mTable: MessageTable!
+    @IBOutlet weak var messageBox: UITextField!
     @IBOutlet weak var tableView: UIView!
     
     var mTable: MessageTable = MessageTable()
@@ -11,17 +10,8 @@ class ChatController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let t = tableView as? MessageTable {
-            print("hi")
-        }
-        for v in tableView.subviews {
-            if let table = v as? MessageTable {
-                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>it happenned")
-            }
-        }
         getAllMessages() { newMessages in
             print(newMessages.count)
-            print("loaded")
             DispatchQueue.main.async {
                 self.mTable.messages = newMessages
                 self.mTable.tableView.reloadData()
@@ -36,23 +26,31 @@ class ChatController: UIViewController {
     }
 
 
-    @IBAction func sendMessage(_ sender: Any) {
-        getAllMessages() { newMessages in
-            print(newMessages.count)
-            print("hello")
-            DispatchQueue.main.async {
-                print("async")
-//                self.mTable.messages = newMessages
-//                self.mTable.reloadData()
-            }
-            
+    @IBAction func sendMessageButton(_ sender: Any) {
+        print("sending \(messageBox.text!)")
+        if messageBox.text! == "" {
+            //TODO notify user that theres nothing there
+            return
         }
+        sendMessage(message: messageBox.text!) { err in
+            if err != nil {
+                print("error sending message I guess")
+                return
+            }
+            getAllMessages() { newMessages in
+                print(newMessages.count)
+                DispatchQueue.main.async {
+                    self.mTable.messages = newMessages
+                    self.mTable.tableView.reloadData()
+                }
+            }
+        }
+        messageBox.text = ""
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("segue")
         if let t = segue.destination as? MessageTable {
-            print("huh")
             mTable = t
         }
     }

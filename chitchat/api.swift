@@ -50,11 +50,30 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
             for messageBlob in m {
                 if let healthyMessage = Message(json: messageBlob ) {
                     messages.append(healthyMessage)
-                    print("good!")
+//                    print("good!")
                 }
             }
         }
         print(messages.count)
         callback(messages)
+    }
+}
+
+
+func sendMessage(message: String, callback: @escaping (Error?) -> Void) {
+    var parms: [String:String] = [String: String]()
+    parms["message"] = message
+    //TODO lat and log things here
+    sendRequest("", parameters: parms, method: "POST") { responseObject, error in
+        guard let responseObject = responseObject, error == nil else {
+            print(error ?? "Unknown error")
+            callback(error)
+            return
+        }
+        print(responseObject)
+        if let m = responseObject["message"] as? String {
+            print("its a string: \(m)")
+        }
+        callback(nil)
     }
 }
