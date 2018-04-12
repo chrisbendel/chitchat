@@ -19,7 +19,7 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! MessageCell
         if orientation == .right {
             //dislike
-            let dislikeAction = SwipeAction(style: .destructive, title: "Dislike") { action, indexPath in
+            let dislikeAction = SwipeAction(style: .destructive, title: "👎") { action, indexPath in
                 dislikeMessage(id: m.id) {error in
                     if error == "disliked" {
                         cell.hideSwipe(animated: true)
@@ -33,10 +33,9 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
                     }
                 }
             }
-//            deleteAction.image = UIImage(named: "delete")
             return [dislikeAction]
         } else {
-            let likeAction = SwipeAction(style: .default, title: "Like") { action, indexPath in
+            let likeAction = SwipeAction(style: .default, title: "👍") { action, indexPath in
                 likeMessage(id: m.id) {error in
                     if error == "liked" {
                         cell.hideSwipe(animated: true)
@@ -50,7 +49,6 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
                     }
                 }
             }
-//            likeAction.image = UIImage(named: "delete")
             return [likeAction]
         }
     }
@@ -72,16 +70,7 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
         cell.MessageLabel.text = m.message
         if (m.imageUrl != "") {
             let url = URL(string: m.imageUrl)
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url!) {
-                    DispatchQueue.main.async {
-                        cell.MessageImage.image = UIImage(data: data)
-                    }
-                } else {
-                    print("bad image")
-                }
-            }
-            
+            cell.MessageImage.kf.setImage(with: url)
         } else {
             cell.MessageImage.image = nil
         }
@@ -90,8 +79,4 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
         cell.delegate = self
         return cell
     }
-    
-    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // cell selected code here
-//    }
 }
