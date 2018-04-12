@@ -28,7 +28,6 @@ func sendRequest(_ url: String, parameters: [String: String], method: String, co
                 return
         }
         let responseObject = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any]
-//        let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         completion(responseObject, nil)
     }
     task.resume()
@@ -43,8 +42,9 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
             print(error ?? "Unknown error")
             return
         }
+        
         var messages: [Message] = [Message]()
-        //print(responseObject)
+        
         if let m = responseObject["messages"] as? [[String:Any]] {
             for messageBlob in m {
                 if let healthyMessage = Message(json: messageBlob ) {
@@ -52,7 +52,7 @@ func getAllMessages(callback: @escaping ([Message]) -> Void) {
                 }
             }
         }
-        print(messages.count)
+        
         messages.reverse()
         callback(messages)
     }
@@ -80,38 +80,66 @@ func sendMessage(message: String, callback: @escaping (Error?) -> Void) {
     }
 }
 
-func likeMessage(id: String, callback: @escaping (Error?) -> Void) {
-    sendRequest("/like/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
-        guard let responseObject = responseObject, error == nil else {
-            print(error ?? "Unknown error")
-            callback(error)
-            return
-        }
-        print(responseObject)
-        if let m = responseObject["message"] as? String {
-            print("its a string: \(m)")
-            if m != "Success" {
-                print("error sending message")
+func likeMessage(id: String, callback: @escaping (String) -> Void) {
+    var preferences = getPreferences()
+    print("liking")
+    print(preferences["\(id)like"])
+    if preferences["\(id)like"] == nil && preferences["\(id)like"] != "liked" {
+        print("inside like")
+        sendRequest("/like/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
+            guard let responseObject = responseObject, error == nil else {
+                print(error ?? "Unknown error")
+                callback(String(describing: error))
+                return
             }
+            
+            if let m = responseObject["message"] as? String {
+                if m != "Success" {
+                    print("error sending message")
+                }
+            }
+            preferences["\(id)like"] = "like"
+            UserDefaults.standard.set(preferences, forKey: "preferences")
+            
+            callback("success")
         }
-        callback(nil)
+    } else {
+        callback("liked")
     }
 }
 
-func dislikeMessage(id: String, callback: @escaping (Error?) -> Void) {
-    sendRequest("/dislike/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
-        guard let responseObject = responseObject, error == nil else {
-            print(error ?? "Unknown error")
-            callback(error)
-            return
-        }
-        print(responseObject)
-        if let m = responseObject["message"] as? String {
-            print("its a string: \(m)")
-            if m != "Success" {
-                print("error sending message")
+func dislikeMessage(id: String, callback: @escaping (String?) -> Void) {
+    var preferences = getPreferences()
+    if preferences["\(id)dislike"] == nil && preferences["\(id)dislike"] != "disliked" {
+        sendRequest("/dislike/" + id, parameters: [String: String](), method: "GET") { responseObject, error in
+            guard let responseObject = responseObject, error == nil else {
+                print(error ?? "Unknown error")
+                callback(String(describing: error))
+                return
             }
+            
+            if let m = responseObject["message"] as? String {
+                if m != "Success" {
+                    print("error sending message")
+                }
+            }
+            
+            preferences["\(id)dislike"] = "dislike"
+            UserDefaults.standard.set(preferences, forKey: "preferences")
+            
+            callback("success")
         }
-        callback(nil)
+    } else {
+        callback("disliked")
+    }
+    
+}
+
+func getPreferences() -> [String : String] {
+    if let preferences = UserDefaults.standard.dictionary(forKey: "preferences") as? [String : String] {
+        return preferences
+    } else {
+        return [String : String]()
     }
 }
+

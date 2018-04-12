@@ -1,12 +1,18 @@
 PODS:
   - IQKeyboardManagerSwift (5.0.8)
+  - Kingfisher (4.6.4)
+  - SwipeCellKit (2.1.0)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - Kingfisher (~> 4.0)
+  - SwipeCellKit
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
+  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
+  SwipeCellKit: 80bdb188166484d8a0d813d9fd7748ad33181815
 
-PODFILE CHECKSUM: bfe23ed2b08473ac5b2e7b1f9a8beeed87c3af0e
+PODFILE CHECKSUM: f74f57aa3653905f2e1f6b1057b2fa26aaf3a8cb
 
 COCOAPODS: 1.4.0
