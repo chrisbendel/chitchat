@@ -9,6 +9,7 @@
 import UIKit
 import SwipeCellKit
 import Kingfisher
+import MapKit
 
 class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
     var messages: [Message] = [Message]()
@@ -63,6 +64,7 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath) as! MessageCell
         
         let m = messages[indexPath.row]
+        
         cell.ClientLabel.text = m.client
         cell.LikesLabel.text = String(m.likes)
         cell.DislikesLabel.text = String(m.dislikes)
@@ -75,6 +77,18 @@ class MessageTable: UITableViewController, SwipeTableViewCellDelegate {
             cell.MessageImage.image = nil
         }
     
+        if m.loc != nil, let loc = m.loc {
+            if let lon = Double(loc[0]), let lat = Double(loc[1]) {
+                cell.map.isHidden = false
+//                print("heyyyyyyy \(lat), \(lon)")
+                let span = MKCoordinateSpanMake(0.0050, 0.0050)
+                let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), span: span)
+                cell.map.setRegion(region, animated: true)
+            }
+        } else {
+            cell.map.isHidden = true
+        }
+        
         cell.id = m.id
         cell.delegate = self
         return cell

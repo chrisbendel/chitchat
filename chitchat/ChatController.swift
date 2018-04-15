@@ -1,16 +1,49 @@
 import UIKit
+import CoreLocation
 
-class ChatController: UIViewController {
+class ChatController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var messageBox: UITextField!
     @IBOutlet weak var tableView: UIView!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
+    
+    // stolen from https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
+    let locationManager = CLLocationManager()
+    
+    func enableLocationServices() {
+        locationManager.delegate = self
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+//            disableMyLocationBasedFeatures()
+            break
+            
+        case .authorizedWhenInUse:
+            // Enable basic location features
+//            enableMyWhenInUseFeatures()
+            break
+            
+        case .authorizedAlways:
+            // Enable any of your app's location features
+//            enableMyAlwaysFeatures()
+            print("hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            break
+        }
+    }
+
     
     var mTable: MessageTable = MessageTable()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateMessages()
+        enableLocationServices()
     }
 
     @IBAction func userTyped(_ sender: UITextField) {

@@ -1,4 +1,5 @@
 import Foundation
+import CoreLocation
 
 let apikey = "3f9c1d3b-50c8-4bae-8f9e-98e41f0baf14";
 let base = "https://www.stepoutnyc.com/chitchat";
@@ -63,6 +64,23 @@ func sendMessage(message: String, callback: @escaping (Error?) -> Void) {
     var parms: [String:String] = [String: String]()
     parms["message"] = message
     //TODO lat and log things here
+    let locationManager = CLLocationManager()
+    locationManager.requestAlwaysAuthorization()
+    
+    // For use in foreground
+    locationManager.requestWhenInUseAuthorization()
+    
+    if CLLocationManager.locationServicesEnabled() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
+        if let lat = locationManager.location?.coordinate.latitude, let lon = locationManager.location?.coordinate.longitude {
+//            print("\(lat), \(lon)")
+            parms["lat"] = String(describing: lat)
+            parms["lon"] = String(describing: lon)
+        }
+    }
+    
+    
     sendRequest("", parameters: parms, method: "POST") { responseObject, error in
         guard let responseObject = responseObject, error == nil else {
             print(error ?? "Unknown error")

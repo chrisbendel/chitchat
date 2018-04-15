@@ -8,11 +8,13 @@
 
 import UIKit
 import SwipeCellKit
+import MapKit
 
 class MessageCell: SwipeTableViewCell {
     
     var id: String!
     
+    @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var ClientLabel: UILabel!
     @IBOutlet weak var MessageLabel: UILabel!

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sK6-GP-qUg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sK6-GP-qUg">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,11 +21,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="message" rowHeight="137" id="uWs-1n-bII" customClass="MessageCell" customModule="chitchat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="310" height="137"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="message" rowHeight="273" id="uWs-1n-bII" customClass="MessageCell" customModule="chitchat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="310" height="273"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uWs-1n-bII" id="a32-AA-1NJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="310" height="136.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="310" height="272.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="741-5P-hfD">
@@ -81,16 +81,25 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7Ba-ph-fuM">
+                                            <rect key="frame" x="16" y="124" width="273" height="126"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="126" id="CFO-Zv-3OX"/>
+                                            </constraints>
+                                        </mapView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="7Ba-ph-fuM" secondAttribute="trailing" constant="21" id="8Ux-6j-yqt"/>
                                         <constraint firstAttribute="trailing" secondItem="741-5P-hfD" secondAttribute="trailing" constant="21" id="8xo-Ss-0bV"/>
                                         <constraint firstItem="741-5P-hfD" firstAttribute="top" secondItem="Idb-Kq-dZw" secondAttribute="bottom" constant="5.5" id="C7f-1J-gvF"/>
                                         <constraint firstItem="gUw-du-58a" firstAttribute="top" secondItem="a32-AA-1NJ" secondAttribute="top" constant="11" id="GNY-rF-Jn5"/>
+                                        <constraint firstAttribute="bottom" secondItem="7Ba-ph-fuM" secondAttribute="bottom" constant="22.5" id="I9z-mr-wDU"/>
                                         <constraint firstItem="dgF-FS-eai" firstAttribute="top" secondItem="JFc-kO-EG2" secondAttribute="bottom" constant="21.5" id="IDv-mH-ZNr"/>
                                         <constraint firstItem="JFc-kO-EG2" firstAttribute="leading" secondItem="a32-AA-1NJ" secondAttribute="leading" constant="16" id="IGf-Re-738"/>
                                         <constraint firstItem="Idb-Kq-dZw" firstAttribute="leading" secondItem="gUw-du-58a" secondAttribute="trailing" constant="8" id="PjZ-xK-4zt"/>
-                                        <constraint firstAttribute="bottom" secondItem="dgF-FS-eai" secondAttribute="bottom" constant="65.5" id="TPz-so-e7V"/>
+                                        <constraint firstItem="7Ba-ph-fuM" firstAttribute="top" secondItem="dgF-FS-eai" secondAttribute="bottom" constant="53" id="QBR-ux-Bu2"/>
                                         <constraint firstAttribute="trailing" secondItem="dgF-FS-eai" secondAttribute="trailing" constant="109" id="V0f-N1-qnn"/>
+                                        <constraint firstItem="7Ba-ph-fuM" firstAttribute="leading" secondItem="a32-AA-1NJ" secondAttribute="leading" constant="16" id="YKC-Iz-bpz"/>
                                         <constraint firstItem="gUw-du-58a" firstAttribute="centerY" secondItem="JFc-kO-EG2" secondAttribute="centerY" id="jPO-Y7-5cy"/>
                                         <constraint firstItem="dgF-FS-eai" firstAttribute="leading" secondItem="a32-AA-1NJ" secondAttribute="leading" constant="14" id="k67-fp-YEi"/>
                                         <constraint firstItem="Idb-Kq-dZw" firstAttribute="leading" secondItem="dgF-FS-eai" secondAttribute="trailing" constant="8" id="nHU-wj-TO3"/>
@@ -107,6 +116,7 @@
                                     <outlet property="LikesLabel" destination="w8b-H5-igf" id="asR-pM-VNl"/>
                                     <outlet property="MessageImage" destination="Idb-Kq-dZw" id="pcJ-Xc-YBl"/>
                                     <outlet property="MessageLabel" destination="dgF-FS-eai" id="6gy-p1-DIR"/>
+                                    <outlet property="map" destination="7Ba-ph-fuM" id="sGM-CU-o3C"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
